@@ -1,9 +1,13 @@
 import styles from '../Todo.module.css'
 
-const TodoFooter = () => {
+interface Props {
+  readonly onClearAll: () => void;
+}
+
+const TodoFooter = ({ onClearAll }: Props) => {
   return(
     <div className={styles.footer}>
-      <button type="button">모두 삭제</button>
+      <button type="button" onClick={onClearAll}>모두 삭제</button>
     </div>
   )
 };
