@@ -15,14 +15,14 @@ const Todos = () => {
       text,
       done: false,
     }
-    setTodos(todos.concat(todo))
+    setTodos(todos => todos.concat(todo))
     nextId.current += 1
   }
-  const onRemove = (id: number) => setTodos(todos.filter(o => o.id !== id))
+  const onRemove = (id: number) => setTodos(todos => todos.filter(o => o.id !== id))
   const onToggle = (id: number) => {
-    setTodos(todos.map(o => (o.id === id ? { ...o, done: !o.done } : o)))
+    setTodos(todos => todos.map(o => (o.id === id ? { ...o, done: !o.done } : o)))
   }
-  const onClearAll = () => setTodos([])
+  const onClearAll = () => setTodos(() => [])
 
   return (
     <div>
