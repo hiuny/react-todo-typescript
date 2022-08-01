@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import TodoFooter from './TodoFooter';
 import TodoHeader from './TodoHeader';
 import TodoInput from './TodoInput';
@@ -9,7 +9,7 @@ import { Todo } from '../App'
 const Todos = () => {
   const [todos, setTodos] = useState<Todo[]>([])
   const nextId = useRef(1)
-  const onInsert = (text: string) => {
+  const onInsert = useCallback((text: string) => {
     const todo = {
       id: nextId.current,
       text,
@@ -17,12 +17,25 @@ const Todos = () => {
     }
     setTodos(todos => todos.concat(todo))
     nextId.current += 1
-  }
-  const onRemove = (id: number) => setTodos(todos => todos.filter(o => o.id !== id))
-  const onToggle = (id: number) => {
-    setTodos(todos => todos.map(o => (o.id === id ? { ...o, done: !o.done } : o)))
-  }
-  const onClearAll = () => setTodos(() => [])
+  }, [])
+  const onRemove = useCallback(
+    (id: number) =>
+      setTodos(
+        todos => todos.filter(o => o.id !== id)
+      ),
+    [],
+  )
+  const onToggle = useCallback(
+    (id: number) =>
+      setTodos(
+        todos => todos.map(o => (o.id === id ? { ...o, done: !o.done } : o))
+      ),
+    [],
+  )
+  const onClearAll = useCallback(
+    () => setTodos(() => []),
+    [],
+  )
 
   return (
     <div>
