@@ -5,13 +5,13 @@ import TodoItem from './TodoItem';
 const TodoList = () => {
   return (
     <TodoConsumer>
-      {(value) => (
+      {({ state, actions }) => (
         <div className={styles.list}>
-          {value.state.todos.map((o, i) => <TodoItem
+          {state.todos.map((o, i) => <TodoItem
             todo={o}
             key={i}
-            onRemove={value.actions.onRemove}
-            onToggle={value.actions.onToggle}
+            onRemove={actions.onRemove}
+            onToggle={actions.onToggle}
           />)}
         </div>
       )}

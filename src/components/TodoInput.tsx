@@ -4,13 +4,13 @@ import styles from '../Todo.module.css'
 const TodoInput = () => {
   return (
     <TodoConsumer>
-      {(value) => (
+      {({ state, actions }) => (
         <div className={styles.input}>
-          <form onSubmit={value.actions.onSubmit}>
+          <form onSubmit={actions.onSubmit}>
             <input
               placeholder="할 일을 입력하세요."
-              value={value.state.input}
-              onChange={value.actions.onChange}
+              value={state.input}
+              onChange={actions.onChange}
             />
             <button type="submit">추가</button>
           </form>
