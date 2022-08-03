@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import TodoFooter from './TodoFooter';
 import TodoHeader from './TodoHeader';
 import TodoInput from './TodoInput';
@@ -8,6 +8,7 @@ import { Todo } from '../App'
 
 const Todos = () => {
   const [todos, setTodos] = useState<Todo[]>([])
+  const [input, setInput] = useState('')
   const nextId = useRef(1)
   const onInsert = useCallback((text: string) => {
     const todo = {
@@ -36,11 +37,19 @@ const Todos = () => {
     () => setTodos(() => []),
     [],
   )
+  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value)
+  }, [])
+  const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    onInsert(input)
+    setInput('')
+  }, [onInsert, input])
 
   return (
     <div>
       <TodoHeader />
-      <TodoInput onInsert={onInsert} />
+      <TodoInput input={input} onChange={onChange} onSubmit={onSubmit} />
       <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
       <TodoFooter  onClearAll={onClearAll} />
     </div>
