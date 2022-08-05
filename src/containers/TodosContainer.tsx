@@ -51,16 +51,11 @@ export default connect(
     input: state.input,
     todos: state.todos,
   }),
-  (dispatch) => (
-    bindActionCreators(
-      {
-        changeTodoInput,
-        addTodo,
-        toggleTodoStatus,
-        removeTodo,
-        clearAllTodos
-      },
-      dispatch,
-    )
-  ),
+  {
+    changeTodoInput,
+    addTodo,
+    toggleTodoStatus,
+    removeTodo,
+    clearAllTodos
+  },
 )(TodosContainer)
