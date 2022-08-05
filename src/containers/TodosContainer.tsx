@@ -10,7 +10,7 @@ import Todos from '../components/Todos'
 
 // type
 import { TodoState } from '../modules/todos'
-import { Dispatch } from 'redux'
+import { bindActionCreators, Dispatch } from 'redux'
 import { Todo } from '../App'
 
 interface Props {
@@ -51,21 +51,16 @@ export default connect(
     input: state.input,
     todos: state.todos,
   }),
-  (dispatch: Dispatch) => ({
-    changeTodoInput: (input: string) => {
-      dispatch(changeTodoInput(input))
-    },
-    addTodo: (input: string) => {
-      dispatch(addTodo(input))
-    },
-    toggleTodoStatus: (id: number) => {
-      dispatch(toggleTodoStatus(id))
-    },
-    removeTodo: (id: number) => {
-      dispatch(removeTodo(id))
-    },
-    clearAllTodos: () => {
-      dispatch(clearAllTodos())
-    },
-  }),
+  (dispatch) => (
+    bindActionCreators(
+      {
+        changeTodoInput,
+        addTodo,
+        toggleTodoStatus,
+        removeTodo,
+        clearAllTodos
+      },
+      dispatch,
+    )
+  ),
 )(TodosContainer)
