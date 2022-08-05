@@ -6,9 +6,22 @@ import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import todos from './modules/todos'
+import todos, { restore } from './modules/todos'
 
 const store = createStore(todos, composeWithDevTools())
+
+function loadData() {
+  try {
+    const data = localStorage.getItem('todo-app-data')
+    console.log('loadData data: ' + data)
+    if (!data) return
+    store.dispatch(restore(JSON.parse(data)))
+  } catch (e) {
+    console.log('localStorage is not working')
+  }
+}
+
+loadData()
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
