@@ -11,10 +11,17 @@ import Todos from '../components/Todos'
 // type
 import { TodoState } from '../modules/todos'
 import { Dispatch } from 'redux'
+import { Todo } from '../App'
 
-type PropsState = ReturnType<typeof mapStateToProps>
-type PropsDispatch = ReturnType<typeof mapDispatchToProps>
-interface Props extends PropsState, PropsDispatch {}
+interface Props {
+  readonly input: string
+  readonly todos: Todo[]
+  readonly removeTodo: (id: number) => void
+  readonly toggleTodoStatus: (id: number) => void
+  readonly clearAllTodos: () => void
+  readonly addTodo: (input: string) => void
+  readonly changeTodoInput: (input: string) => void
+}
 
 // connect 함수에 의해 상태와 스토어 상태 변경 함수를 props로 전달 받음
 const TodosContainer = ({
@@ -39,32 +46,26 @@ const TodosContainer = ({
   )
 }
 
-// 스토어 상태를 props로 매핑
-const mapStateToProps = (state: TodoState) => ({
-  input: state.input,
-  todos: state.todos,
-})
-
-// 스토어 상태 변경 함수를 props로 매핑
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  changeTodoInput: (input: string) => {
-    dispatch(changeTodoInput(input))
-  },
-  addTodo: (input: string) => {
-    dispatch(addTodo(input))
-  },
-  toggleTodoStatus: (id: number) => {
-    dispatch(toggleTodoStatus(id))
-  },
-  removeTodo: (id: number) => {
-    dispatch(removeTodo(id))
-  },
-  clearAllTodos: () => {
-    dispatch(clearAllTodos())
-  },
-})
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  (state: TodoState) => ({
+    input: state.input,
+    todos: state.todos,
+  }),
+  (dispatch: Dispatch) => ({
+    changeTodoInput: (input: string) => {
+      dispatch(changeTodoInput(input))
+    },
+    addTodo: (input: string) => {
+      dispatch(addTodo(input))
+    },
+    toggleTodoStatus: (id: number) => {
+      dispatch(toggleTodoStatus(id))
+    },
+    removeTodo: (id: number) => {
+      dispatch(removeTodo(id))
+    },
+    clearAllTodos: () => {
+      dispatch(clearAllTodos())
+    },
+  }),
 )(TodosContainer)
