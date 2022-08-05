@@ -5,7 +5,7 @@ import TodoItem from './TodoItem';
 import { Todo } from '../App'
 
 interface Props {
-  readonly todos: Todo[]
+  readonly todos?: Todo[]
   readonly onRemove: (id: number) => void
   readonly onToggle: (id: number) => void
 }
@@ -17,7 +17,7 @@ const TodoList = ({
 }: Props) => {
   return (
     <div className={styles.list}>
-      {todos.map((o, i) => <TodoItem
+      {todos && todos.map((o, i) => <TodoItem
         todo={o}
         key={i}
         onRemove={onRemove}
