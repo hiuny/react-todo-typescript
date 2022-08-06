@@ -11,15 +11,15 @@ import Todos from '../components/Todos'
 import { useCallback } from 'react'
 
 // type
-import { Todo } from '../App'
 import { TodoState } from '../modules/todos'
+import { getFilteredTodos } from '../modules/selectors'
 
 // connect 함수에 의해 상태와 스토어 상태 변경 함수를 props로 전달 받음
 const TodosContainer = () => {
-  const { input, todos, filter } = useSelector((state: TodoState) => ({
+  const { input, filter, filteredTodos } = useSelector((state: TodoState) => ({
     input: state.input,
-    todos: state.todos,
     filter: state.filter,
+    filteredTodos: getFilteredTodos(state),
   }))
   const dispatch = useDispatch()
   const onChangeInput = useCallback((input: string) => dispatch(changeTodoInput(input)), [dispatch])
@@ -28,12 +28,6 @@ const TodosContainer = () => {
   const onRemove = useCallback((id: number) => dispatch(removeTodo(id)), [dispatch])
   const onClearAll = useCallback(() => dispatch(clearAllTodos()), [dispatch])
   const onChangeFilter = useCallback((filter: string) => dispatch(changeFilter(filter)), [dispatch])
-  const getFilteredTodos = (todos: Todo[], filter: string) => {
-    if (filter === 'ALL') return todos
-    if (filter === 'A') return todos.filter(o => !o.done)
-    if (filter === 'B') return todos.filter(o => o.done)
-  }
-  const filteredTodos = getFilteredTodos(todos, filter)
   return (
     <Todos
       input={input}

@@ -48,6 +48,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["redux", "npm:4.2.0"],\
             ["redux-actions", "npm:2.6.5"],\
             ["redux-devtools-extension", "virtual:78f9e72a2dd65f35b35c8d9a9e23ba061b4b8c5c7acf2ba0793b82804b2a0116a0e167a545aeb10af519c21d374d62cb7894612bcb986a61ac9243179edaff61#npm:2.13.9"],\
+            ["reselect", "npm:4.1.6"],\
             ["typesafe-actions", "npm:5.1.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af"],\
             ["web-vitals", "npm:2.1.4"]\
@@ -14484,6 +14485,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["redux", "npm:4.2.0"],\
             ["redux-actions", "npm:2.6.5"],\
             ["redux-devtools-extension", "virtual:78f9e72a2dd65f35b35c8d9a9e23ba061b4b8c5c7acf2ba0793b82804b2a0116a0e167a545aeb10af519c21d374d62cb7894612bcb986a61ac9243179edaff61#npm:2.13.9"],\
+            ["reselect", "npm:4.1.6"],\
             ["typesafe-actions", "npm:5.1.0"],\
             ["typescript", "patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af"],\
             ["web-vitals", "npm:2.1.4"]\
@@ -14761,6 +14763,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/requires-port-npm-1.0.0-fd036b488a-eee0e303ad.zip/node_modules/requires-port/",\
           "packageDependencies": [\
             ["requires-port", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["reselect", [\
+        ["npm:4.1.6", {\
+          "packageLocation": "./.yarn/cache/reselect-npm-4.1.6-869f318cc3-3ea1058422.zip/node_modules/reselect/",\
+          "packageDependencies": [\
+            ["reselect", "npm:4.1.6"]\
           ],\
           "linkType": "HARD"\
         }]\
