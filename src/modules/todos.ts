@@ -10,6 +10,7 @@ const REMOVE_TODO = 'REMOVE_TODO'
 const CLEAR_ALL_TODOS = 'CLEAR_ALL_TODOS'
 const RESTORE = 'RESTORE'
 const CHANGE_FILTER = 'CHANGE_FILTER'
+const EDIT_TODO = 'EDIT_TODO'
 
 // 액션 생성 함수
 export const changeTodoInput = createAction(CHANGE_TODO_INPUT,
@@ -30,6 +31,7 @@ export const removeTodo = createAction(REMOVE_TODO,
 export const clearAllTodos = createAction(CLEAR_ALL_TODOS)
 export const restore = createAction(RESTORE, (data: string) => data)
 export const changeFilter = createAction(CHANGE_FILTER, (filter: string) => filter)
+export const editTodo = createAction(EDIT_TODO, (id: number, input: string) => ({ id, input }))
 
 // 상태 인터페이스 정의
 export interface TodoState {
@@ -95,7 +97,16 @@ const todos = createReducer(
     [CHANGE_FILTER]: (state, { payload: filter }) => ({
       ...state,
       filter,
-    })
+    }),
+    [EDIT_TODO]: (state, action) => ({
+      ...state,
+      todos: state.todos.map(todo => (
+        todo.id === action.payload.id ? {
+          ...todo,
+          text: action.payload.input,
+        } : todo
+      ))
+    }),
   },
 )
 

@@ -7,9 +7,10 @@ interface Props {
   readonly todo: Todo;
   readonly onRemove: (id: number) => void;
   readonly onToggle: (id: number) => void;
+  readonly onEdit: (id: number, input: string) => void
 }
 
-const TodoItem = ({ todo, onRemove, onToggle }: Props) => {
+const TodoItem = ({ todo, onRemove, onToggle, onEdit }: Props) => {
   const { id, text, done } = todo
   // 편집 입력 요소 표시여부 상태 선언
   const [showInput, setShowInput] = useState(false)
@@ -32,12 +33,14 @@ const TodoItem = ({ todo, onRemove, onToggle }: Props) => {
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       console.log('handleKeyPress Enter inputText : ' + inputText)
+      onEdit(id, inputText)
       setShowInput(false)
     }
   }
   // 입력 요소 포커스가 사라지면 실행되는 함수
   const handleBlur = () => {
     console.log('handleBlur inputText : ' + inputText)
+    onEdit(id, inputText)
     setShowInput(false)
   }
   // 마운트될 때 편집 입력 요소값 설정

@@ -17,6 +17,7 @@ interface Props {
   readonly onRemove: (id: number) => void
   readonly onClearAll: () => void
   readonly onChangeFilter: (filter: string) => void
+  readonly onEdit: (id: number, input: string) => void
 }
 
 const Todos = ({
@@ -29,7 +30,7 @@ const Todos = ({
   onRemove,
   onClearAll,
   onChangeFilter,
-
+  onEdit,
 }: Props) => {
   return (
     <div>
@@ -47,6 +48,7 @@ const Todos = ({
         todos={todos}
         onRemove={onRemove}
         onToggle={onToggle}
+        onEdit={onEdit}
       />
       <TodoFooter
         onClearAll={onClearAll}
